@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost/NCAATeamsDB', { useNewUrlParser: true });
 var TeamsSchema = mongoose.Schema({
     name: String,
     rankingSpot: Number,
-    avatarUrl:Image(75, 75)         //make sure this portion works with returning the images
+    //avatarUrl:Image(75, 75)         //make sure this portion works with returning the images
 });
 
 var Teams = mongoose.model('Teams', TeamsSchema);
@@ -46,7 +46,7 @@ router.get('/NCAATeamsGet', function(req, res) {
     res.send(teams);
 });
 
-route.delete('/NCAATeamsDelete', function(req, res) {
+router.delete('/NCAATeamsDelete', function(req, res) {
     console.log("In NCAATeam delete route");
     console.log(req.body);
     var teamName = name;
@@ -61,7 +61,7 @@ route.delete('/NCAATeamsDelete', function(req, res) {
         })
 });
 
-route.post('/NCAATeamsPost', function(req, res) {
+router.post('/NCAATeamsPost', function(req, res) {
     console.log("In NCAATeam post route");
     console.log(req.body);
     collection.insertOne(req.body, function(err, result) {
