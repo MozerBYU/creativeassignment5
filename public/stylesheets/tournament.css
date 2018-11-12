@@ -1,0 +1,45 @@
+/* Css for the tournament buttons */
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+button:hover {
+    opacity:1;
+}
+
+.winner1btn {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+.winner1btn, .winner2btn {
+  float: left;
+  width: 50%;
+}
+
+@media screen and (max-width: 300px) {
+    .winner1btn, .winner2btn {
+       width: 100%;
+    }
+}
+
+/* Css for the columns */
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
