@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/epsn.css">
+    <link rel="styelsheet" type="text/css" href="styelsheets/startTourney.css">
     <script src="javascripts/espn.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -34,36 +35,17 @@
     <div class="header">
         <h1>NCAA College Football Tournament</h1>
     </div>
-    <div class="column" ng-app="myTourneyApp">>
-        <div class="column-right">
-            <h3>Add a team to the tourney</h3>
-            <div class="addButton" ng-controller="addCtrl">
-                <h4></h4>
-                Enter the team name: <br><input type="text" name="teamName"><br> Enter the team's ranking: (1 - 25) <br><input type="text" name="teamRanking"><br>
-                <!-- Jake when a team ranking is entered, have the angular replace the current team with
-                the newly entered team if you can. -->
-                Add a team avatar url: <br><input type="text" name="teamAvatar"><br>
-                <button type="submit">Add Team</button>
-            </div>
-        </div>
-        <div class="column-middle">
-            <h3>Display all the current teams in the tourney</h3>
-            <div class="showButton" ng-controller="showCtrl">
-                <button type="submit">Show Current Teams</button>
-            </div>
-        </div>
-        <div class="column-left">
-            <h3>Begin the tourney</h3>
-            <form action="http://ec2-18-220-201-172.us-east-2.compute.amazonaws.com/CreativeAssignments/creativeassignment5/public/startTournament.html"> 
-                <button type="submit" class="tourneyButton">Click to Begin!</button>
-            </form>
+    <div class="displayWinner" ng-app="myTourneyApp">
+        <h2>The Winner</h2>
+        <div ng-controller="winnerCtrl">
+            <h4>Team</h4>
+            {{ team in tourneyTeams }}
+            <h4>Ranking</h4>
+            {{ ranking in tourneyTeams }}
+            <h4>Avatar Url</h4>
+            {{ avatar in tourneyTeams }}
         </div>
     </div>
-    </div>
-
-    <!-- add teams button - way to add a new team, with ranking and avatarUrl -->
-    <!-- show teams button - display current teams in database-->
-    <!-- start tournament button - , go through tournament, display current winner-->
 
     <div class="footer">
         <p>Nathan Mozer, Jacob Griffley © 2018</p>
