@@ -14,5 +14,18 @@
     "mongodb": "^3.1.9",
     "mongoose": "^5.3.10",
     "morgan": "~1.9.0"
-  }
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MozerBYU/creativeassignment5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MozerBYU/creativeassignment5/issues"
+  },
+  "homepage": "https://github.com/MozerBYU/creativeassignment5#readme",
+  "description": ""
 }
