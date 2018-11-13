@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost/NCAATeamsDB', { useNewUrlParser: true });
 var TeamsSchema = mongoose.Schema({
     name: String,
     rankingSpot: Number,
-    //avatarUrl:Image(75, 75)         //make sure this portion works with returning the images
+    avatarUrl: String         //make sure this portion works with returning the images
 });
 
 var Teams = mongoose.model('Teams', TeamsSchema);
@@ -19,6 +19,20 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log('Connected');
+    Teams.find(function(err, teamsList) {
+        if(err) console.error(err);
+        else {
+            if(teamsList.length == 0) {
+                console.log("size is 0");
+                NCAAFTeamRankings.forEach(function(item) {
+                    let newTeam = new Teams(item);
+                    newTeam.save(function(err, post) {
+                        if(err) console.error(err); return;
+                    });
+                });
+            }
+        }
+    });
 });
 
 /* Get route */
@@ -29,50 +43,42 @@ router.get('/', function(req, res) {
 
 router.get('/NCAATeamsGet', function(req, res) {
     console.log("In NCAATeams get route");
-    console.log(req.body);
-    collection.find().toArray(function(err, result) {
-        if (err) {
-            console.log("Error in get route");
-        }
-        else if (result.length) {
-            console.log("Query Worked");
-            console.log(result);
-            res.send(result);
-        }
+    Teams.find(function(err, teamList) {
+        if(err) console.error(err);
         else {
-            console.log("No Data Found");
+            res.json(teamList);
         }
     });
-    res.send(teams);
 });
 
 router.delete('/NCAATeamsDelete', function(req, res) {
     console.log("In NCAATeam delete route");
-    console.log(req.body);
-    var teamName = name;
-        Teams.deleteOne({ name: teamName }, function(err, result) {
-            if (err) {
-                console.log("Error in delete route");
-            }
-            else {
-                console.log(teamName + " has been deleted");
-                res.send(result);
-            }
-        })
+    let teamName = req.query.q;
+    // NCAAFTeamRankings.forEach(function(item) {
+    //     if(item.name == teamName) {
+    //         res.sendStatus(200);
+    //         return;
+    //     }
+    // });
+    
+    Teams.remove({name: teamName}, function(err) {
+        if(err) console.log(err);
+        else {
+            res.sendStatus(200);
+        }
+    });
 });
 
 router.post('/NCAATeamsPost', function(req, res) {
     console.log("In NCAATeam post route");
     console.log(req.body);
-    collection.insertOne(req.body, function(err, result) {
-        if (err) {
-            console.log("Error in post route");
-        }
+    let newTeam = new Teams(req.body);
+    newTeam.save(function(err, post) {
+        if(err) console.error(err);
         else {
-            res.end('{"success" : "Updated Successfully", "status" : 200}');
+            res.sendStatus(200); 
         }
-    })
-    res.end('{"success" : "Updated Successfully", "status" : 200}');
+    });
 });
 
 module.exports = router;
