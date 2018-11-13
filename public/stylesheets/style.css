@@ -36,3 +36,51 @@ p {
     visibility: hidden;
 }
 
+/* Css for the columns and buttons */
+
+.column {
+    -webkit-column-count: 3; 
+    -moz-column-count: 3; 
+    column-count: 3;
+    column-rule-style: solid;
+    column-rule-width: 1px;
+    column-rule-color: black;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+button:hover {
+    opacity:1;
+}
+
+.addButton {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+.addButton, .showButton {
+    float: left;
+    width: 50%;
+}
+
+.tourneyButton {
+    padding: 16px 26px;
+    background-color: #110D8A;
+    text-align: center;
+    color: white;
+}
+
+@media screen and (max-width: 300px) {
+    .addButton, .showButton {
+       width: 100%;
+    }
+}

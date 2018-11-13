@@ -34,10 +34,33 @@
     <div class="header">
         <h1>NCAA College Football Tournament</h1>
     </div>
+    <div class="column">
+        <div class="column-right">
+            <h3>Right</h3>
+        </div>
+        <div class="column-middle">
+            <h3>Middle</h3>
+        </div>
+        <div class="column-left">
+            <h3>Left</h3>
+        </div>
+    </div>
+    <div class="buttons" ng-app="myTourneyApp">
+        <div class="addButton" ng-controller="addCtrl">
+            <input type="text" 
+            <button type="submit">Add Team</button>
+        </div>
+        <div class="showButton" ng-controller="showCtrl">
+            <button type="submit">Show Current Teams</button>
+        </div>
+        <div class="tourneyButton" ng-controller="tourneyCtrl">
+            <button type="submit">Begin Tournament</button>
+        </div>
+    </div>
     <!-- add teams button - way to add a new team, with ranking and avatarUrl -->
     <!-- show teams button - display current teams in database-->
     <!-- start tournament button - , go through tournament, display current winner-->
-   
+
 
 
     <div class="footer">
