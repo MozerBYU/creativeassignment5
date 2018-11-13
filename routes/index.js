@@ -46,6 +46,9 @@ router.get('/NCAATeamsGet', function(req, res) {
     Teams.find(function(err, teamList) {
         if(err) console.error(err);
         else {
+            teamList.sort(function(a, b) {
+                return a.rankingSpot - b.rankingSpot;
+            });
             res.json(teamList);
         }
     });
@@ -53,15 +56,10 @@ router.get('/NCAATeamsGet', function(req, res) {
 
 router.delete('/NCAATeamsDelete', function(req, res) {
     console.log("In NCAATeam delete route");
-    var teamName;
-    Teams.find(function(err, teamList) {
-        if(err) console.log(err);
-        else {
-            teamName = teamList[teamList.length - 1].name;
-            console.log(teamName);
-        }
-    })
-    Teams.remove({name: teamName}, function(err) {
+    var ranking = parseInt(req.query.q, 10);
+    
+    
+    Teams.remove({rankingSpot: ranking}, function(err) {
         if(err) console.log(err);
         else {
             res.sendStatus(200);
