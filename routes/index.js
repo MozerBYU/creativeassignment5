@@ -53,14 +53,14 @@ router.get('/NCAATeamsGet', function(req, res) {
 
 router.delete('/NCAATeamsDelete', function(req, res) {
     console.log("In NCAATeam delete route");
-    let teamName = req.query.q;
-    // NCAAFTeamRankings.forEach(function(item) {
-    //     if(item.name == teamName) {
-    //         res.sendStatus(200);
-    //         return;
-    //     }
-    // });
-    
+    var teamName;
+    Teams.find(function(err, teamList) {
+        if(err) console.log(err);
+        else {
+            teamName = teamList[teamList.length - 1].name;
+            console.log(teamName);
+        }
+    })
     Teams.remove({name: teamName}, function(err) {
         if(err) console.log(err);
         else {
