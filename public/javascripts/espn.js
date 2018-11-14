@@ -43,6 +43,8 @@ app.controller('addCtrl', function($scope, $http) {
         console.log("The tourney has begun");
         $scope.teams = [];
         $scope.teamWinners = [];
+        $scope.tempWinners = [];
+        var winningTeam;
 
         $scope.getTeams = function() {
             let url = "NCAATeamsGet";
@@ -52,95 +54,67 @@ app.controller('addCtrl', function($scope, $http) {
             });
         };
 
-        for (var i = 0; i < teams.size(); i++) {
-            teamWinners.at(i) = teams.at(i);
+        for (var i = 0; i < teams.length; i++) {
+            teamWinners.push(teams.at(i));
         }
         //
-        var continueBool = false;
         var roundFinished = false;
         var winnerFound = false;
 
-        var battleWinner = 0;
         var incrementNum = 0;
         var roundNum = 0;
         var startingBattleSpot = 0;
         var tournamentNum = 0;
-        var winnerVectorIndex = 0;
+        var winnerIndex = 0;
 
         do {
-            teamWinners[0]; //Reset the size to 0
+            tempWinners = [];
             tournamentNum = 0;
-            continueBool = false;
             roundFinished = false;
 
             do {
                 startingBattleSpot = tournamentNum * 2;
-                do {
-                    for (int i = startingBattleSpot, j = 1; i < startingBattleSpot + 2; i++, j++) {
-                        if (i == startingBattleSpot) {
-                            cout << "Type";
-                        }
-                        else {
-                            cout << "type";
-                        }
-                        cout << " \"" << j << "\" if you prefer " << restaurantVector.at(i);
-                        if (i == startingBattleSpot) {
-                            cout << " or" << endl;
-                        }
-                    }
-                    cout << endl;
+                var randNum = ((Math.random() * 2) + 1);
+                
+                console.log("Rand value " + randNum);
 
-                    battleWinner = ErrorCheckInput(false);
-                    if (battleWinner != -1) {
-                        continueBool = true;
-                    }
-                } while (continueBool == false);
+                if (randNum == 1) {
+                    console.log("Team 1 wins");
+                    console.log("Spot " + startingBattleSpot);
+                    teamWinners.splice(startingBattleSpot, 1);
+                    //delete team 1
+                }
+                else {
+                    console.log("Team 2 wins");
+                    console.log("Spot " + (startingBattleSpot + 1));
+                    teamWinners.splice(startingBattleSpot + 1, 1);
+                    //delete team 2
+                }
 
                 incrementNum = startingBattleSpot - 1;
-                winnerVectorIndex = battleWinner + incrementNum;
+                winnerIndex = randNum + incrementNum;
 
-                tempRestaurantVector.push_back(restaurantVector.at(winnerVectorIndex));
+                tempWinners.push(teamWinners.at(winnerIndex));
 
                 tournamentNum++;
 
-                if (tournamentNum == (restaurantVector.size() / 2)) {
+                if (tournamentNum == (teamWinners.length / 2)) {
                     roundFinished = true;
                 }
             } while (roundFinished == false);
 
-            restaurantVector.resize(NUM_ELEMENTS);
+            teamWinners = [];
 
-            for (unsigned int m = 0; m < tempRestaurantVector.size(); m++) {
-                restaurantVector.push_back(tempRestaurantVector.at(m));
-            }
+            var teamWinners = tempWinners.splice();
 
-            if (restaurantVector.size() == 1) {
+            if (teamWinners.length == 1) {
                 winnerFound = true;
             }
 
             roundNum++;
         } while (winnerFound == false);
-        cout << "The winning restaurant is " << restaurantVector.at(0) << "." << endl;
-
-
-
-        //
-        for
-
-        var indexSpot =
-
-
-            var randNum = ((Math.random() * 2) + 1);
-
-        if (randNum == 1) {
-            console.log("Team 1 wins");
-            teams.splice(indexSpot, 1);
-            //delete team 1
-        }
-        else {
-            console.log("Team 2 wins");
-            //delete team 2
-        }
+        $scope.winningTeam.toString(teamWinners[0]);
+        console.log("Winning team " + teamWinners[0]);
     }
 });
 app.controller('showCtrl', function($scope, $http) {
