@@ -54,3 +54,14 @@ li.game-spacer {
 li.game-bottom {
     border-top: 1px solid #aaa;
 }
+
+/* Css for the page */
+
+h2 {
+    float: right;
+    font-size: 16px;
+}
+footer {
+    text-align: center;
+    
+}

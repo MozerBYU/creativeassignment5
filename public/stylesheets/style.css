@@ -35,28 +35,3 @@ p {
 .break {
     visibility: hidden;
 }
-
-/* Css for the columns */
-
-.column {
-    -webkit-column-count: 3; 
-    -moz-column-count: 3; 
-    column-count: 3;
-    column-rule-style: solid;
-    column-rule-width: 1px;
-    column-rule-color: black;
-}
-
-/* Css for the buttons */
-
-.addButton {
-    
-}
-
-.showButton {
-    
-}
-
-.tourneyButton {
-    
-}

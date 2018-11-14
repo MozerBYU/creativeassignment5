@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/epsn.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/bracketdisplay.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
@@ -40,107 +40,125 @@
         <h1>NCAA Collge Football Tournament</h1>
     </div>
     <div ng-controller="addCtrl">
+        <h3>Let the Tourney Begin!</h3>
+        <button type="submit" spng-onclick="beginTourney()">Click to begin the tourney!</button>
         <main id="tournament">
+
             <ul class="round round-1">
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{teams[0].name}}</li>
+                <li class="game game-top winner">{{ teams[0].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, spot : "16" }}</li>
+                <li class="game game-bottom ">{{ teams[15].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, spot : "3" }}</li>
+                <li class="game game-top winner">{{ teams[2].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, spot : "14" }}</li>
+                <li class="game game-bottom ">{{ teams[13].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top ">{{ teamName, spot : "5" }}</li>
+                <li class="game game-top ">{{ teams[4].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom winner">{{ teamName, spot : "12" }}</li>
+                <li class="game game-bottom winner">{{ teams[11].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, spot : "7" }}</li>
+                <li class="game game-top winner">{{ teams[6].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, spot : "10" }}</li>
+                <li class="game game-bottom ">{{ teams[9].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, spot : "9" }}</li>
+                <li class="game game-top winner">{{ teams[8].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, spot : "8" }}</li>
+                <li class="game game-bottom ">{{ teams[7].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, spot : "11" }}</li>
+                <li class="game game-top winner">{{ teams[10].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, spot : "6" }}</li>
+                <li class="game game-bottom ">{{ teams[5].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, spot : "13" }}</li>
+                <li class="game game-top winner">{{ teams[12].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, spot : "4" }}</li>
+                <li class="game game-bottom ">{{ teams[3].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, spot : "15" }}</li>
+                <li class="game game-top winner">{{ teams[13].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, spot : "2" }}</li>
+                <li class="game game-bottom ">{{ teams[1].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
             </ul>
+
             <ul class="round round-2">
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, winner : "1" }}</li>
+                <li class="game game-top winner">{{ teamWinners[0].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, winner : "8" }}</li>
+                <li class="game game-bottom ">{{ teamWinners[7].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, winner : "3" }}</li>
+                <li class="game game-top winner">{{ teamWinners[2].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, winner : "6" }}</li>
+                <li class="game game-bottom ">{{ teamWinners[5].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top ">{{ teamName, winner : "5" }}</li>
+                <li class="game game-top ">{{ teamWinners[4].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom winner">{{ teamName, winner : "4" }}</li>
+                <li class="game game-bottom winner">{{ teamWinners[3].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top ">{{ teamName, winner : "3" }}</li>
+                <li class="game game-top ">{{ teamWinners[6].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom winner">{{ teamName, winner : "2" }}</li>
+                <li class="game game-bottom winner">{{ teamWinners[1].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
             </ul>
+
             <ul class="round round-3">
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, winner : "1" }}</li>
+                <li class="game game-top winner">{{ teamWinners[0].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, winner : "4" }}</li>
+                <li class="game game-bottom ">{{ teamWinners[3].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top ">{{ teamName, winner : "3" }}</li>
+                <li class="game game-top ">{{ teamWinners[2].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom winner">{{ teamName, winner : "2" }}</li>
+                <li class="game game-bottom winner">{{ teamWinners[1].name }}</li>
 
                 <li class="spacer">&nbsp;</li>
             </ul>
+
             <ul class="round round-4">
                 <li class="spacer">&nbsp;</li>
 
-                <li class="game game-top winner">{{ teamName, winner : "1" }}</li>
+                <li class="game game-top winner">{{ teamWinners[0].name }}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-bottom ">{{ teamName, winner : "2" }}</li>
+                <li class="game game-bottom ">{{ teamWinners[1].name }}</li>
+
+                <li class="spacer">&nbsp;</li>
             </ul>
+
+            <ul class="round round-5">
+                <li class="spacer">&nbsp;</li>
+
+                <li class="game game-top winner">{{ teamWinners[0].name }}</li>
+                <h2>Winner Of The Tourney</h2>
+
+                <li class="spacer">&nbsp;</li>
+            </ul>
+
         </main>
     </div>
 
