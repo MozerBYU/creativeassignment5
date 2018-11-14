@@ -54,8 +54,8 @@ app.controller('addCtrl', function($scope, $http) {
             });
         };
 
-        for (var i = 0; i < teams.length; i++) {
-            teamWinners.push(teams.at(i));
+        for (var i = 0; i < $scope.teams.length; i++) {
+            teamWinners.push($scope.teams[i]);
         }
         //
         var roundFinished = false;
@@ -68,7 +68,7 @@ app.controller('addCtrl', function($scope, $http) {
         var winnerIndex = 0;
 
         do {
-            tempWinners = [];
+            $scope.tempWinners = [];
             tournamentNum = 0;
             roundFinished = false;
 
@@ -81,40 +81,40 @@ app.controller('addCtrl', function($scope, $http) {
                 if (randNum == 1) {
                     console.log("Team 1 wins");
                     console.log("Spot " + startingBattleSpot);
-                    teamWinners.splice(startingBattleSpot, 1);
+                    $scope.teamWinners.splice(startingBattleSpot, 1);
                     //delete team 1
                 }
                 else {
                     console.log("Team 2 wins");
                     console.log("Spot " + (startingBattleSpot + 1));
-                    teamWinners.splice(startingBattleSpot + 1, 1);
+                    $scope.teamWinners.splice(startingBattleSpot + 1, 1);
                     //delete team 2
                 }
 
                 incrementNum = startingBattleSpot - 1;
                 winnerIndex = randNum + incrementNum;
 
-                tempWinners.push(teamWinners.at(winnerIndex));
+                $scope.tempWinners.push($scope.teamWinners[winnerIndex]);
 
                 tournamentNum++;
 
-                if (tournamentNum == (teamWinners.length / 2)) {
+                if (tournamentNum == ($scope.teamWinners.length / 2)) {
                     roundFinished = true;
                 }
             } while (roundFinished == false);
 
-            teamWinners = [];
+            $scope.teamWinners = [];
 
-            var teamWinners = tempWinners.splice();
+            $scope.teamWinners = $scope.tempWinners.splice();
 
-            if (teamWinners.length == 1) {
+            if ($scope.teamWinners.length == 1) {
                 winnerFound = true;
             }
 
             roundNum++;
         } while (winnerFound == false);
-        $scope.winningTeam.toString(teamWinners[0]);
-        console.log("Winning team " + teamWinners[0]);
+        $scope.winningTeam = ($scope.teamWinners[0]);
+        console.log("Winning team " + $scope.teamWinners[0]);
     }
 });
 app.controller('showCtrl', function($scope, $http) {
