@@ -16,7 +16,7 @@
 <body>
 
     <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
+        <div class="container-fluid darkBG">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -35,41 +35,47 @@
             </div>
         </div>
     </nav>
-    <div class="header">
+    <div class="container-fluid footballPic">
         <h1>NCAA College Football Tournament</h1>
     </div>
-    <div class="column" ng-app="myTourneyApp">
+    <div class="container-fluid greenBG" ng-app="myTourneyApp">
         <div ng-controller="addCtrl">
-            <div>
-                <h3>Add a team to the tourney</h3>
-                <form ng-submit="deleteTeam()">
-                    Enter the team name: <br><input type="text" name="teamName" ng-model="teamName"><br> Enter the team's ranking: (1 - 25) <br><input type="text" name="teamRanking" ng-model="ranking"><br> Add a team avatar url: <br><input type="text"
-                        name="teamAvatar" ng-model="imageURL"><br>
-                    <button type="submit">Add Team</button>
+            <div class="container-fluid">
+                <h2 style="padding-left: 25px;" class = "whiteText">Add a team to the tourney</h2>
+                <form ng-submit="deleteTeam()" class="form-group side-padding">
+                    <label for="teamName" class="top-bottom-padding whiteText">Team Name:</label>
+                    <input type="text" id="teamName" ng-model="teamName" class="form-control">
+                    <label for="teamRanking" class="top-bottom-padding whiteText">Ranking (1-16):</label>
+                    <input type="text" id="teamRanking" ng-model="ranking" class="form-control">
+                    <label for="teamAvatar" class="top-bottom-padding whiteText">Image URL:</label>
+                    <input type="text" id="teamAvatar" ng-model="imageURL" class="form-control">
+                    <br>
+                    <button type="submit" class = "btn btn-primary">Add Team</button>
                 </form>
             </div>
-            <div>
-                <h3>Display all the current teams in the tourney</h3>
-                <form ng-submit="getTeams()">
-                    <button type="submit">Show Current Teams</button>
-                </form>
-                <ul>
-                    <li ng-repeat="team in teams"> {{team.name}} </li>
+            <div class = "container-fluid">
+                <h2 style="padding-top: 25px;" class = "centered whiteText">The current teams in the tourney</h2>
+                <ul class="centered teamList">
+                    <li ng-repeat="team in teams" style = "padding-bottom: 25px;" class = "whiteText teams">
+                        {{team.name}} ({{team.rankingSpot}})<br>
+                        <img src={{team.avatarUrl}} height="200"></img>
+                    </li>
                 </ul>
             </div>
             <div>
-                <h3>Begin the tourney</h3>
-                <form action="./displayTournament.html">
-                    <button type="submit" class="tourneyButton">Click to Begin!</button>
+                <h2 style = "padding-left: 25px;" class = "whiteText">Begin the tourney</h2>
+                <form action="./displayTournament.html" class = "side-padding">
+                    <button type="submit" class="btn btn-primary">Click to Begin!</button>
                 </form>
+                <br>
+                <br>
             </div>
         </div>
     </div>
-    </div>
 
-    <div class="footer">
-        <p>Nathan Mozer, Jacob Griffley © 2018</p>
-        <p>Not owned or endorsed by NCAA</p>
+    <div class="footer darkBG" style = "padding-top: 50px; padding-bottom: 30px;">
+        <p class = "centered small whiteText">Nathan Mozer, Jacob Griffley © 2018</p>
+        <p class = "centered small whiteText">Not owned or endorsed by NCAA</p>
     </div>
 
 </body>

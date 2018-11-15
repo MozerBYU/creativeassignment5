@@ -3,6 +3,20 @@
 //select the winning team and put it in a new array of teams for the next round
 var app = angular.module('myTourneyApp', []);
 app.controller('addCtrl', function($scope, $http) {
+    $scope.teams = [];
+    $scope.tournamentTeams = [];
+
+    $scope.getTeams = function() {
+        let url = "NCAATeamsGet";
+
+        $http.get(url).then(function(response) {
+            $scope.teams = response.data;
+            console.log($scope.teams);
+        });
+    };
+
+    $scope.getTeams();
+
     $scope.addNewTeam = function() {
         let teamName = $scope.teamName;
         let ranking = $scope.ranking;
@@ -16,6 +30,7 @@ app.controller('addCtrl', function($scope, $http) {
             data: newTeam
         }).success(function(data, status, headers, config) {
             console.log("post worked");
+            $scope.getTeams();
         }).error(function(data, status, headers, config) {
             console.log("post failed");
         });
@@ -26,7 +41,8 @@ app.controller('addCtrl', function($scope, $http) {
     };
 
     $scope.deleteTeam = function() {
-        let url = "NCAATeamsDelete";
+        let url = "NCAATeamsDelete?q=";
+        url += $scope.ranking;
 
         $http({
             url: url,
@@ -41,18 +57,10 @@ app.controller('addCtrl', function($scope, $http) {
 
     $scope.beginTourney = function() {
         console.log("The tourney has begun");
-        $scope.teams = [];
-        $scope.teamWinners = [];
-        $scope.tempWinners = [];
+        $scope.tournamentTeams = [];
+        var teamWinners = [];
+        var tempWinners = [];
         var winningTeam;
-
-        $scope.getTeams = function() {
-            let url = "NCAATeamsGet";
-
-            $http.get(url).then(function(response) {
-                $scope.teams = response;
-            });
-        };
 
         for (var i = 0; i < $scope.teams.length; i++) {
             teamWinners.push($scope.teams[i]);
@@ -66,65 +74,75 @@ app.controller('addCtrl', function($scope, $http) {
         var startingBattleSpot = 0;
         var tournamentNum = 0;
         var winnerIndex = 0;
+        var team1Spot;
+        var team2Spot;
+        var firstTime = true;
 
         do {
-            $scope.tempWinners = [];
+            tempWinners = [];
             tournamentNum = 0;
             roundFinished = false;
+            if (firstTime) {
+                team1Spot = 0;
+                team2Spot = teamWinners.length - 1;
+            }
+            else {
+                team1Spot = 0;
+                team2Spot = 1;
+            }
 
             do {
-                startingBattleSpot = tournamentNum * 2;
-                var randNum = ((Math.random() * 2) + 1);
-                
+
+                var randNum = Math.floor((Math.random() * 2) + 1);
+
                 console.log("Rand value " + randNum);
 
                 if (randNum == 1) {
                     console.log("Team 1 wins");
-                    console.log("Spot " + startingBattleSpot);
-                    $scope.teamWinners.splice(startingBattleSpot, 1);
+                    tempWinners.push(teamWinners[team1Spot])
                     //delete team 1
                 }
                 else {
                     console.log("Team 2 wins");
-                    console.log("Spot " + (startingBattleSpot + 1));
-                    $scope.teamWinners.splice(startingBattleSpot + 1, 1);
+                    tempWinners.push(teamWinners[team2Spot]);
                     //delete team 2
                 }
 
-                incrementNum = startingBattleSpot - 1;
-                winnerIndex = randNum + incrementNum;
+                // incrementNum = startingBattleSpot - 1;
+                // winnerIndex = randNum + incrementNum;
 
-                $scope.tempWinners.push($scope.teamWinners[winnerIndex]);
+                // tempWinners.push(teamWinners[winnerIndex]);
 
-                tournamentNum++;
+                tournamentNum += 1;
 
-                if (tournamentNum == ($scope.teamWinners.length / 2)) {
+                if (firstTime) {
+                    team1Spot += 2;
+                    team2Spot = teamWinners.length - 1 - team1Spot;
+                }
+                else {
+                    team1Spot += 2;
+                    team2Spot = team1Spot + 1;
+                }
+
+                if (tournamentNum == Math.floor(teamWinners.length / 2)) {
+                    firstTime = false;
                     roundFinished = true;
                 }
             } while (roundFinished == false);
 
-            $scope.teamWinners = [];
+            teamWinners = tempWinners;
+            $scope.tournamentTeams.push(tempWinners);
 
-            $scope.teamWinners = $scope.tempWinners.splice();
-
-            if ($scope.teamWinners.length == 1) {
+            if (teamWinners.length == 1) {
                 winnerFound = true;
             }
 
             roundNum++;
         } while (winnerFound == false);
-        $scope.winningTeam = ($scope.teamWinners[0]);
-        console.log("Winning team " + $scope.teamWinners[0]);
-    }
+        winningTeam = (teamWinners[0]);
+        console.log($scope.tournamentTeams);
+    };
 });
 app.controller('showCtrl', function($scope, $http) {
-    $scope.teams = [];
 
-    $scope.getTeams = function() {
-        let url = "NCAATeamsGet";
-
-        $http.get(url).then(function(response) {
-            $scope.teams = response;
-        });
-    };
 });
